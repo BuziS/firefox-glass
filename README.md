@@ -4,8 +4,19 @@ A Safari-inspired glass theme for Firefox: a floating centred address bar, pill-
 
 Tested on Firefox 161 (macOS and Windows).
 
-![Dark](screenshots/dark.png)
-![Light](screenshots/light.png)
+**Home page**
+![Home page](screenshots/home.png)
+
+**With tabs**
+![With tabs](screenshots/tabs.png)
+
+**With tab groups**
+![With tab groups](screenshots/groups.png)
+
+**Light mode**
+![Light mode](screenshots/light.png)
+
+**Find bar**
 ![Find bar](screenshots/find.png)
 
 ## Install
