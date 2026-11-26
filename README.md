@@ -49,5 +49,6 @@ Quit Firefox, then delete the `chrome` folder and `user.js` from your profile fo
 ## Credits and licence
 - Made by [BuziS](https://github.com/BuziS).
 - Based on [GWfox-T](https://github.com/akkva/GWfox-T) by akkva.
+- Parts originally based on [safari-firefox](https://github.com/gauravrocks009/safari-firefox) by gauravrocks009 (MIT License - see [LICENSE-safari-firefox](LICENSE-safari-firefox)).
 - Licensed under the Mozilla Public License 2.0 - see [LICENSE](LICENSE).
 - Windows package includes the Inter font by Rasmus Andersson (SIL Open Font License, see `windows/chrome/fonts/Inter-LICENSE.txt`).

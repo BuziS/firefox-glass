@@ -4958,3 +4958,272 @@ html#main-window:not(:has(#TabsToolbar tab.tabbrowser-tab[fadein]:not([hidden]) 
 
 /* ===== Empty bookmarks bar: hide Firefox's plain "For quick access, place your bookmarks here..." text ===== */
 html#main-window #PersonalToolbar #personal-toolbar-empty-description:not(#sf-a):not(#sf-b):not(#sf-c) { display: none !important; }
+
+
+/* ===== v1.1: Glossy capsules (glass + rim recipe from GWfox-T by akkva, MPL-2.0) =====
+   Uses GWfox-T's own capsule recipe (akkva, MPL-2.0): --bg5 glass gradient + --bs3 glossy rim
+   (hairline dark sides + bright white inset highlight on the top and bottom edge).
+   Applied to toolbar buttons, back/forward pair, URL bar and the selected tab. Remove this block to undo. */
+@media (-moz-platform: macos) {
+  :root:root {
+    /* light toolbars: GWfox-T glass (gradient + glossy white rim) */
+    --kw-glass: linear-gradient(to bottom, color-mix(in srgb, rgba(255,255,255,.2), rgba(255,255,255,.3) 20%), rgba(220,220,220,.2) 20%, rgba(230,230,230,.2) 40%, color-mix(in srgb, rgba(255,255,255,.2), rgba(255,255,255,.3) 45%));
+    --kw-rim: -.5px 0 0 rgba(0,0,0,.22), .5px 0 0 rgba(0,0,0,.22), 0 -.5px 0 rgba(0,0,0,.09), 0 .5px 0 rgba(0,0,0,.09),
+      inset 0 1.5px 1.5px -1.5px rgba(255,255,255,.75), inset 0 -1.5px 1.5px -1.5px rgba(255,255,255,.75);
+    --sf-gloss-bg: var(--kw-glass) !important;
+    --sf-gloss: var(--kw-rim) !important;
+  }
+  /* dark toolbars: Safari-style flat pill — even fill, crisp hairline edge, thin top highlight, no blur.
+     Follows the TOOLBAR brightness (Adaptive Tab Bar Colour / themes set [lwtheme-brighttext]),
+     falling back to the system dark mode when no theme colour is active. */
+  :root:root[lwtheme-brighttext] {
+    --kw-glass: rgba(255,255,255,.14);
+    --kw-rim: inset 0 0 0 .5px rgba(255,255,255,.10), inset 0 .5px 0 rgba(255,255,255,.22);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:root:not([lwtheme]) {
+      --kw-glass: rgba(255,255,255,.14);
+      --kw-rim: inset 0 0 0 .5px rgba(255,255,255,.10), inset 0 .5px 0 rgba(255,255,255,.22);
+    }
+  }
+  /* toolbar capsules (menu, reload, new tab, share, extensions …) */
+  html#main-window :is(#PanelUI-menu-button, #reload-button, #stop-button, #tabs-newtab-button, #share-tab-button, #unified-extensions-button):not(#kw-a):not(#sf-a):not(#sf-b):not(#sf-c):not(#sf-d):not(#sf-e) {
+    background: var(--kw-glass) !important; box-shadow: var(--kw-rim) !important;
+  }
+  /* back / forward pair: ONE glossy capsule drawn by #back-button (GWfox-T technique, no seam);
+     #forward-button sits on its right half, transparent, with only a short faint divider */
+  html#main-window:not([customizing]) #back-button:not(#kw-a):not(#sf-a):not(#sf-b):not(#sf-c):not(#sf-d):not(#sf-e) {
+    width: 72px !important; min-width: 72px !important; max-width: 72px !important;
+    padding-inline: 0 36px !important; border-radius: 999px !important;
+    background: var(--kw-glass) !important; box-shadow: var(--kw-rim) !important;
+  }
+  html#main-window:not([customizing]) #back-button:has(+ #forward-button):not(#kw-a):not(#sf-a):not(#sf-b):not(#sf-c):not(#sf-d):not(#sf-e) + #forward-button:not(#kw-a):not(#sf-a):not(#sf-b):not(#sf-c):not(#sf-d):not(#sf-e) {
+    margin-inline-start: -36px !important; border-radius: 0 999px 999px 0 !important;
+    background: transparent !important; box-shadow: none !important;
+    border-left: 1px solid transparent !important;
+    border-image: linear-gradient(to bottom, transparent 24%, rgba(130,130,130,.14) 24%, rgba(130,130,130,.14) 76%, transparent 76%) 1 !important;
+  }
+  @media (prefers-color-scheme: dark) {
+    html#main-window:not([customizing]) #back-button:has(+ #forward-button):not(#kw-a):not(#sf-a):not(#sf-b):not(#sf-c):not(#sf-d):not(#sf-e) + #forward-button:not(#kw-a):not(#sf-a):not(#sf-b):not(#sf-c):not(#sf-d):not(#sf-e) {
+      border-image: linear-gradient(to bottom, transparent 24%, rgba(160,160,160,.2) 24%, rgba(160,160,160,.2) 76%, transparent 76%) 1 !important;
+    }
+  }
+  /* hover: keep the capsule whole, light up only the hovered arrow; divider disappears */
+  html#main-window:not([customizing]) :is(#back-button, #forward-button):not([disabled]):not(#kw-a):not(#sf-a):not(#sf-b):not(#sf-c):not(#sf-d):not(#sf-e):hover {
+    background-color: transparent;
+  }
+  html#main-window:not([customizing]) #back-button:not([disabled]):not(#kw-a):not(#sf-a):not(#sf-b):not(#sf-c):not(#sf-d):not(#sf-e):hover {
+    background: var(--kw-glass) !important; box-shadow: var(--kw-rim) !important;
+  }
+  html#main-window:not([customizing]) #forward-button:not([disabled]):not(#kw-a):not(#sf-a):not(#sf-b):not(#sf-c):not(#sf-d):not(#sf-e):hover { background: transparent !important; }
+  html#main-window:not([customizing]) :is(#back-button, #forward-button):not([disabled]):not(#kw-a):not(#sf-a):not(#sf-b):not(#sf-c):not(#sf-d):not(#sf-e):hover > .toolbarbutton-icon {
+    background: light-dark(rgba(0,0,0,.07), rgba(255,255,255,.10)) !important; border-radius: 999px !important;
+  }
+  html#main-window:not([customizing]):has(#back-button:not([disabled]):hover, #forward-button:not([disabled]):hover) #forward-button:not(#kw-a):not(#sf-a):not(#sf-b):not(#sf-c):not(#sf-d):not(#sf-e) {
+    border-image: none !important; border-left-color: transparent !important;
+  }
+  /* ===== Right pill [ ↓ | ⇪ | + ] as ONE liquid glass capsule =====
+     The capsule is drawn by Share's ::before (behind every icon, never catches clicks) and its width
+     morphs 36 → 72 → 108px as Share / Downloads come and go. + and Downloads are plain transparent
+     36px buttons on top, so every button keeps its normal click area. No dividers. */
+  html#main-window {
+    --kw-i: 0;
+    --kw-pill-w: 72px;
+    --kw-spring: cubic-bezier(.34, 1.36, .54, 1);   /* small overshoot, like macOS */
+    --kw-ease: cubic-bezier(.2, .8, .2, 1);
+  }
+  html#main-window:has(.tabbrowser-tab[selected][label="New Tab"]) { --kw-pill-w: 32px; --kw-pill-r: -34px; }
+  html#main-window:has(#downloads-button:not([hidden])) { --kw-pill-w: 108px; }
+  html#main-window:has(.tabbrowser-tab[selected][label="New Tab"]):has(#downloads-button:not([hidden])) { --kw-pill-w: 72px; }
+
+  html#main-window:not([inFullscreen]):not([inDOMFullscreen]) :is(#tabs-newtab-button, #new-tab-button):not(#kw-a):not(#sf-a):not(#sf-b):not(#sf-c):not(#sf-d):not(#sf-e):not(#sf-f):not(#sf-g):not(#sf-h) {
+    right: 12px !important; width: 36px !important; min-width: 36px !important; max-width: 36px !important;
+    padding: 0 !important; border-radius: 999px !important;
+    background: transparent !important; box-shadow: none !important; transition: none !important;
+  }
+  html#main-window:not([inFullscreen]):not([inDOMFullscreen]) :is(#tabs-newtab-button, #new-tab-button):not(#kw-a):not(#sf-a):not(#sf-b):not(#sf-c):not(#sf-d):not(#sf-e):not(#sf-f):not(#sf-g):not(#sf-h):hover { background: transparent !important; box-shadow: none !important; }
+  html#main-window:not([inFullscreen]):not([inDOMFullscreen]) :is(#tabs-newtab-button, #new-tab-button):not(#kw-a):not(#sf-a):not(#sf-b):not(#sf-c):not(#sf-d):not(#sf-e):not(#sf-f):not(#sf-g):not(#sf-h) > .toolbarbutton-icon { margin-inline-start: 0 !important; transition: background-color .2s ease !important; }
+
+  /* Share: always rendered (it carries the capsule); on new tabs only its icon melts into + */
+  html#main-window:not([inFullscreen]):not([inDOMFullscreen]) #share-tab-button:not(#kw-a):not(#sf-a):not(#sf-b):not(#sf-c):not(#sf-d):not(#sf-e):not(#sf-f):not(#sf-g):not(#sf-h) {
+    right: 48px !important; z-index: 100000 !important; border-radius: 999px !important;
+    background: transparent !important; box-shadow: none !important;
+    opacity: 1 !important; visibility: visible !important; transform: none !important; filter: none !important;
+    pointer-events: auto !important; overflow: visible !important;
+  }
+  html#main-window:not([inFullscreen]):not([inDOMFullscreen]) #share-tab-button:not(#kw-a):not(#sf-a):not(#sf-b):not(#sf-c):not(#sf-d):not(#sf-e):not(#sf-f):not(#sf-g):not(#sf-h)::before {
+    content: "" !important; display: block !important; position: absolute !important;
+    top: 0 !important; bottom: 0 !important; right: var(--kw-pill-r, -36px) !important; left: auto !important;
+    width: var(--kw-pill-w) !important; border-radius: 999px !important; z-index: -1 !important;
+    background: var(--kw-glass) !important; box-shadow: var(--kw-rim) !important; pointer-events: none !important;
+    transition: width .33s var(--kw-spring) !important;
+  }
+  html#main-window:not([inFullscreen]):not([inDOMFullscreen]) #share-tab-button:not(#kw-a):not(#sf-a):not(#sf-b):not(#sf-c):not(#sf-d):not(#sf-e):not(#sf-f):not(#sf-g):not(#sf-h) > .toolbarbutton-icon {
+    opacity: 1; transform: none; filter: none;
+    transition: opacity .18s ease, transform .33s var(--kw-spring), filter .2s ease, background-color .2s ease !important;
+  }
+  html#main-window:not([inFullscreen]):not([inDOMFullscreen]):has(.tabbrowser-tab[selected][label="New Tab"]) #share-tab-button:not(#kw-a):not(#sf-a):not(#sf-b):not(#sf-c):not(#sf-d):not(#sf-e):not(#sf-f):not(#sf-g):not(#sf-h) { pointer-events: none !important; }
+  html#main-window:not([inFullscreen]):not([inDOMFullscreen]):has(.tabbrowser-tab[selected][label="New Tab"]) #share-tab-button:not(#kw-a):not(#sf-a):not(#sf-b):not(#sf-c):not(#sf-d):not(#sf-e):not(#sf-f):not(#sf-g):not(#sf-h) > .toolbarbutton-icon {
+    opacity: 0 !important; transform: translateX(22px) scale(.55) !important; filter: blur(3px) !important;
+    transition: opacity .14s ease, transform .26s var(--kw-ease), filter .16s ease !important;
+  }
+  html#main-window:not([inFullscreen]):not([inDOMFullscreen]) #share-tab-button:not(#kw-a):not(#sf-a):not(#sf-b):not(#sf-c):not(#sf-d):not(#sf-e):not(#sf-f):not(#sf-g):not(#sf-h)::after { display: none !important; content: none !important; }
+
+  /* Downloads: same treatment; it also animates out instead of vanishing */
+  html#main-window:not([inFullscreen]):not([inDOMFullscreen]) #downloads-button:not(#kw-a):not(#sf-a):not(#sf-b):not(#sf-c):not(#sf-d):not(#sf-e):not(#sf-f):not(#sf-g):not(#sf-h) {
+    position: fixed !important; top: 7px !important; left: auto !important; right: 84px !important;
+    width: 36px !important; min-width: 36px !important; height: 32px !important; margin: 0 !important; padding: 0 !important;
+    display: flex !important; align-items: center !important; justify-content: center !important; z-index: 100002 !important;
+    background: transparent !important; box-shadow: none !important; border-radius: 999px !important;
+    opacity: 1; visibility: visible; transform: none; filter: none;
+    transition: right .33s var(--kw-spring), opacity .18s ease, transform .33s var(--kw-spring), filter .2s ease, visibility .33s allow-discrete !important;
+  }
+  html#main-window:not([inFullscreen]):not([inDOMFullscreen]):has(.tabbrowser-tab[selected][label="New Tab"]) #downloads-button:not(#kw-a):not(#sf-a):not(#sf-b):not(#sf-c):not(#sf-d):not(#sf-e):not(#sf-f):not(#sf-g):not(#sf-h) { right: 48px !important; }
+  html#main-window:not([inFullscreen]):not([inDOMFullscreen]) #downloads-button[hidden]:not(#kw-a):not(#sf-a):not(#sf-b):not(#sf-c):not(#sf-d):not(#sf-e):not(#sf-f):not(#sf-g):not(#sf-h) {
+    right: 48px !important; opacity: 0 !important; visibility: hidden !important; pointer-events: none !important;
+    transform: translateX(22px) scale(.55) !important; filter: blur(3px) !important;
+  }
+  @starting-style {
+    html#main-window:not([inFullscreen]):not([inDOMFullscreen]) #downloads-button:not(#kw-a):not(#sf-a):not(#sf-b):not(#sf-c):not(#sf-d):not(#sf-e):not(#sf-f):not(#sf-g):not(#sf-h) { opacity: 0; transform: translateX(22px) scale(.55); filter: blur(3px); }
+  }
+  html#main-window:not([inFullscreen]):not([inDOMFullscreen]) #downloads-button:not(#kw-a):not(#sf-a):not(#sf-b):not(#sf-c):not(#sf-d):not(#sf-e):not(#sf-f):not(#sf-g):not(#sf-h)::after { display: none !important; content: none !important; }
+  html#main-window:not([inFullscreen]):not([inDOMFullscreen]) #downloads-button:not([hidden]):not(#kw-a):not(#sf-a):not(#sf-b):not(#sf-c):not(#sf-d):not(#sf-e):not(#sf-f):not(#sf-g):not(#sf-h):hover { background: transparent !important; }
+
+  /* hover: capsule stays whole, only the hovered icon gets a soft round highlight */
+  html#main-window:not([inFullscreen]):not([inDOMFullscreen]) #share-tab-button:not(#kw-a):not(#sf-a):not(#sf-b):not(#sf-c):not(#sf-d):not(#sf-e):not(#sf-f):not(#sf-g):not(#sf-h):hover { background: transparent !important; }
+  html#main-window:not([inFullscreen]):not([inDOMFullscreen]) :is(#share-tab-button, #tabs-newtab-button, #new-tab-button):not(#kw-a):not(#sf-a):not(#sf-b):not(#sf-c):not(#sf-d):not(#sf-e):not(#sf-f):not(#sf-g):not(#sf-h):hover > .toolbarbutton-icon,
+  html#main-window:not([inFullscreen]):not([inDOMFullscreen]) #downloads-button:not([hidden]):not(#kw-a):not(#sf-a):not(#sf-b):not(#sf-c):not(#sf-d):not(#sf-e):not(#sf-f):not(#sf-g):not(#sf-h):hover .toolbarbutton-badge-stack {
+    background: light-dark(rgba(0,0,0,.07), rgba(255,255,255,.10)) !important; border-radius: 999px !important;
+  }
+  /* hover: no small circles behind single icons — the whole capsule brightens a little (Safari) */
+  html#main-window:not([inFullscreen]):not([inDOMFullscreen]) :is(#share-tab-button, #tabs-newtab-button, #new-tab-button):not(#kw-a):not(#sf-a):not(#sf-b):not(#sf-c):not(#sf-d):not(#sf-e):not(#sf-f):not(#sf-g):not(#sf-h):hover > .toolbarbutton-icon,
+  html#main-window:not([inFullscreen]):not([inDOMFullscreen]) :is(#share-tab-button, #tabs-newtab-button, #new-tab-button):not(#kw-a):not(#sf-a):not(#sf-b):not(#sf-c):not(#sf-d):not(#sf-e):not(#sf-f):not(#sf-g):not(#sf-h):not(#kw-z):hover > .toolbarbutton-icon,
+  html#main-window:not([inFullscreen]):not([inDOMFullscreen]) #downloads-button:not(#kw-a):not(#sf-a):not(#sf-b):not(#sf-c):not(#sf-d):not(#sf-e):not(#sf-f):not(#sf-g):not(#sf-h):not(#kw-z):hover .toolbarbutton-badge-stack,
+  html#main-window:not([customizing]) :is(#back-button, #forward-button):not([disabled]):not(#kw-a):not(#sf-a):not(#sf-b):not(#sf-c):not(#sf-d):not(#sf-e):not(#kw-z):hover > .toolbarbutton-icon {
+    background: none !important; box-shadow: none !important;
+  }
+  html#main-window:not([inFullscreen]):not([inDOMFullscreen]):has(:is(#share-tab-button, #tabs-newtab-button, #new-tab-button, #downloads-button):hover) #share-tab-button:not(#kw-a):not(#sf-a):not(#sf-b):not(#sf-c):not(#sf-d):not(#sf-e):not(#sf-f):not(#sf-g):not(#sf-h)::before,
+  html#main-window:not([customizing]):has(:is(#back-button, #forward-button):not([disabled]):hover) #back-button:not(#kw-a):not(#sf-a):not(#sf-b):not(#sf-c):not(#sf-d):not(#sf-e) {
+    filter: brightness(1.18) !important;
+  }
+  html#main-window[lwtheme]:not([lwtheme-brighttext]):not([inFullscreen]):not([inDOMFullscreen]):has(:is(#share-tab-button, #tabs-newtab-button, #new-tab-button, #downloads-button):hover) #share-tab-button:not(#kw-a):not(#sf-a):not(#sf-b):not(#sf-c):not(#sf-d):not(#sf-e):not(#sf-f):not(#sf-g):not(#sf-h)::before,
+  html#main-window[lwtheme]:not([lwtheme-brighttext]):not([customizing]):has(:is(#back-button, #forward-button):not([disabled]):hover) #back-button:not(#kw-a):not(#sf-a):not(#sf-b):not(#sf-c):not(#sf-d):not(#sf-e) {
+    filter: brightness(.96) !important;
+  }
+  html#main-window:not([inFullscreen]):not([inDOMFullscreen]) #share-tab-button:not(#kw-a):not(#sf-a):not(#sf-b):not(#sf-c):not(#sf-d):not(#sf-e):not(#sf-f):not(#sf-g):not(#sf-h)::before { transition: width .33s var(--kw-spring), right .33s var(--kw-spring), filter .15s ease !important; }
+
+  /* press feedback */
+  html#main-window:not([inFullscreen]):not([inDOMFullscreen]) :is(#share-tab-button, #tabs-newtab-button, #new-tab-button, #downloads-button):not(#kw-a):not(#sf-a):not(#sf-b):not(#sf-c):not(#sf-d):not(#sf-e):not(#sf-f):not(#sf-g):not(#sf-h):active > :is(.toolbarbutton-icon, .toolbarbutton-badge-stack) {
+    transform: scale(.88); transition: transform .12s ease !important;
+  }
+
+  /* ===== Tab switching: ONE glass capsule slides to the newly selected tab =====
+     Tabs are equal width and their backgrounds touch, so the capsule is anchored to the FIRST tab's
+     background (CSS anchor positioning gives size + position) and moved with
+     transform: translateX(index × 100%) — transform transitions, so it slides with a spring.
+     Only active when there are no pinned tabs / tab groups (unequal widths); otherwise the selected
+     tab simply keeps its own glass background. */
+  html#main-window #tabbrowser-tabs[orient="horizontal"]:not(#kw-a):not(#kw-b):not(#sf-a):not(#sf-b):not(#sf-c):not(#sf-d):not(#sf-e):not(#sf-f):not(#sf-g) { position: relative !important; }
+  html#main-window:not(:has(tab-group, .tabbrowser-tab[pinned])) #tabbrowser-tabs[orient="horizontal"] #tabbrowser-arrowscrollbox > :nth-child(1 of .tabbrowser-tab[fadein]:not([hidden], [closing])) .tab-background:not(#kw-a):not(#kw-b):not(#sf-a):not(#sf-b):not(#sf-c):not(#sf-d):not(#sf-e):not(#sf-f):not(#sf-g) { anchor-name: --kw-first-tab !important; }
+  html#main-window:not(:has(tab-group, .tabbrowser-tab[pinned])) #tabbrowser-tabs[orient="horizontal"]:not([movingtab]) .tabbrowser-tab[selected]:not(#kw-a):not(#kw-b):not(#sf-a):not(#sf-b):not(#sf-c):not(#sf-d):not(#sf-e):not(#sf-f):not(#sf-g),
+  html#main-window:not(:has(tab-group, .tabbrowser-tab[pinned])) #tabbrowser-tabs[orient="horizontal"]:not([movingtab]) .tabbrowser-tab[selected] :is(.tab-stack, .tab-background, .tab-content):not(#kw-a):not(#kw-b):not(#sf-a):not(#sf-b):not(#sf-c):not(#sf-d):not(#sf-e):not(#sf-f):not(#sf-g) {
+    background: transparent !important; background-image: none !important; box-shadow: none !important;
+    outline: none !important; border-color: transparent !important; filter: none !important; animation: none !important;
+    backdrop-filter: none !important;  /* base theme blurs the selected tab -> it smeared the capsule under it */
+  }
+  html#main-window:not(:has(tab-group, .tabbrowser-tab[pinned])) #tabbrowser-tabs[orient="horizontal"]:not(#kw-a):not(#kw-b):not(#sf-a):not(#sf-b):not(#sf-c):not(#sf-d):not(#sf-e):not(#sf-f):not(#sf-g)::after {
+    content: "" !important; display: block !important; position: absolute !important;
+    position-anchor: --kw-first-tab;
+    top: anchor(top); bottom: anchor(bottom); left: anchor(left); right: anchor(right);
+    border-radius: 999px !important; pointer-events: none !important; z-index: 0 !important;
+    background: var(--kw-glass) !important; box-shadow: var(--kw-rim) !important;
+    transform: translateX(calc(var(--kw-i) * 100%)) !important;
+    transition: transform .3s cubic-bezier(.3, 1.12, .5, 1), opacity .15s ease !important;
+  }
+  html#main-window #tabbrowser-tabs[orient="horizontal"]:has(#tabbrowser-arrowscrollbox > :nth-child(1 of .tabbrowser-tab[fadein]:not([hidden], [closing]))[selected]) { --kw-i: 0; }
+  html#main-window #tabbrowser-tabs[orient="horizontal"]:has(#tabbrowser-arrowscrollbox > :nth-child(2 of .tabbrowser-tab[fadein]:not([hidden], [closing]))[selected]) { --kw-i: 1; }
+  html#main-window #tabbrowser-tabs[orient="horizontal"]:has(#tabbrowser-arrowscrollbox > :nth-child(3 of .tabbrowser-tab[fadein]:not([hidden], [closing]))[selected]) { --kw-i: 2; }
+  html#main-window #tabbrowser-tabs[orient="horizontal"]:has(#tabbrowser-arrowscrollbox > :nth-child(4 of .tabbrowser-tab[fadein]:not([hidden], [closing]))[selected]) { --kw-i: 3; }
+  html#main-window #tabbrowser-tabs[orient="horizontal"]:has(#tabbrowser-arrowscrollbox > :nth-child(5 of .tabbrowser-tab[fadein]:not([hidden], [closing]))[selected]) { --kw-i: 4; }
+  html#main-window #tabbrowser-tabs[orient="horizontal"]:has(#tabbrowser-arrowscrollbox > :nth-child(6 of .tabbrowser-tab[fadein]:not([hidden], [closing]))[selected]) { --kw-i: 5; }
+  html#main-window #tabbrowser-tabs[orient="horizontal"]:has(#tabbrowser-arrowscrollbox > :nth-child(7 of .tabbrowser-tab[fadein]:not([hidden], [closing]))[selected]) { --kw-i: 6; }
+  html#main-window #tabbrowser-tabs[orient="horizontal"]:has(#tabbrowser-arrowscrollbox > :nth-child(8 of .tabbrowser-tab[fadein]:not([hidden], [closing]))[selected]) { --kw-i: 7; }
+  html#main-window #tabbrowser-tabs[orient="horizontal"]:has(#tabbrowser-arrowscrollbox > :nth-child(9 of .tabbrowser-tab[fadein]:not([hidden], [closing]))[selected]) { --kw-i: 8; }
+  html#main-window #tabbrowser-tabs[orient="horizontal"]:has(#tabbrowser-arrowscrollbox > :nth-child(10 of .tabbrowser-tab[fadein]:not([hidden], [closing]))[selected]) { --kw-i: 9; }
+  html#main-window #tabbrowser-tabs[orient="horizontal"]:has(#tabbrowser-arrowscrollbox > :nth-child(11 of .tabbrowser-tab[fadein]:not([hidden], [closing]))[selected]) { --kw-i: 10; }
+  html#main-window #tabbrowser-tabs[orient="horizontal"]:has(#tabbrowser-arrowscrollbox > :nth-child(12 of .tabbrowser-tab[fadein]:not([hidden], [closing]))[selected]) { --kw-i: 11; }
+  html#main-window #tabbrowser-tabs[orient="horizontal"]:has(#tabbrowser-arrowscrollbox > :nth-child(13 of .tabbrowser-tab[fadein]:not([hidden], [closing]))[selected]) { --kw-i: 12; }
+  html#main-window #tabbrowser-tabs[orient="horizontal"]:has(#tabbrowser-arrowscrollbox > :nth-child(14 of .tabbrowser-tab[fadein]:not([hidden], [closing]))[selected]) { --kw-i: 13; }
+  html#main-window #tabbrowser-tabs[orient="horizontal"]:has(#tabbrowser-arrowscrollbox > :nth-child(15 of .tabbrowser-tab[fadein]:not([hidden], [closing]))[selected]) { --kw-i: 14; }
+  html#main-window #tabbrowser-tabs[orient="horizontal"]:has(#tabbrowser-arrowscrollbox > :nth-child(16 of .tabbrowser-tab[fadein]:not([hidden], [closing]))[selected]) { --kw-i: 15; }
+  html#main-window #tabbrowser-tabs[orient="horizontal"]:has(#tabbrowser-arrowscrollbox > :nth-child(17 of .tabbrowser-tab[fadein]:not([hidden], [closing]))[selected]) { --kw-i: 16; }
+  html#main-window #tabbrowser-tabs[orient="horizontal"]:has(#tabbrowser-arrowscrollbox > :nth-child(18 of .tabbrowser-tab[fadein]:not([hidden], [closing]))[selected]) { --kw-i: 17; }
+  html#main-window #tabbrowser-tabs[orient="horizontal"]:has(#tabbrowser-arrowscrollbox > :nth-child(19 of .tabbrowser-tab[fadein]:not([hidden], [closing]))[selected]) { --kw-i: 18; }
+  html#main-window #tabbrowser-tabs[orient="horizontal"]:has(#tabbrowser-arrowscrollbox > :nth-child(20 of .tabbrowser-tab[fadein]:not([hidden], [closing]))[selected]) { --kw-i: 19; }
+  html#main-window #tabbrowser-tabs[orient="horizontal"]:has(#tabbrowser-arrowscrollbox > :nth-child(21 of .tabbrowser-tab[fadein]:not([hidden], [closing]))[selected]) { --kw-i: 20; }
+  html#main-window #tabbrowser-tabs[orient="horizontal"]:has(#tabbrowser-arrowscrollbox > :nth-child(22 of .tabbrowser-tab[fadein]:not([hidden], [closing]))[selected]) { --kw-i: 21; }
+  html#main-window #tabbrowser-tabs[orient="horizontal"]:has(#tabbrowser-arrowscrollbox > :nth-child(23 of .tabbrowser-tab[fadein]:not([hidden], [closing]))[selected]) { --kw-i: 22; }
+  html#main-window #tabbrowser-tabs[orient="horizontal"]:has(#tabbrowser-arrowscrollbox > :nth-child(24 of .tabbrowser-tab[fadein]:not([hidden], [closing]))[selected]) { --kw-i: 23; }
+  html#main-window #tabbrowser-tabs[orient="horizontal"]:has(#tabbrowser-arrowscrollbox > :nth-child(25 of .tabbrowser-tab[fadein]:not([hidden], [closing]))[selected]) { --kw-i: 24; }
+  html#main-window #tabbrowser-tabs[orient="horizontal"]:has(#tabbrowser-arrowscrollbox > :nth-child(26 of .tabbrowser-tab[fadein]:not([hidden], [closing]))[selected]) { --kw-i: 25; }
+  html#main-window #tabbrowser-tabs[orient="horizontal"]:has(#tabbrowser-arrowscrollbox > :nth-child(27 of .tabbrowser-tab[fadein]:not([hidden], [closing]))[selected]) { --kw-i: 26; }
+  html#main-window #tabbrowser-tabs[orient="horizontal"]:has(#tabbrowser-arrowscrollbox > :nth-child(28 of .tabbrowser-tab[fadein]:not([hidden], [closing]))[selected]) { --kw-i: 27; }
+  html#main-window #tabbrowser-tabs[orient="horizontal"]:has(#tabbrowser-arrowscrollbox > :nth-child(29 of .tabbrowser-tab[fadein]:not([hidden], [closing]))[selected]) { --kw-i: 28; }
+  html#main-window #tabbrowser-tabs[orient="horizontal"]:has(#tabbrowser-arrowscrollbox > :nth-child(30 of .tabbrowser-tab[fadein]:not([hidden], [closing]))[selected]) { --kw-i: 29; }
+  html#main-window #tabbrowser-tabs[orient="horizontal"]:has(#tabbrowser-arrowscrollbox > :nth-child(31 of .tabbrowser-tab[fadein]:not([hidden], [closing]))[selected]) { --kw-i: 30; }
+  html#main-window #tabbrowser-tabs[orient="horizontal"]:has(#tabbrowser-arrowscrollbox > :nth-child(32 of .tabbrowser-tab[fadein]:not([hidden], [closing]))[selected]) { --kw-i: 31; }
+  html#main-window #tabbrowser-tabs[orient="horizontal"]:has(#tabbrowser-arrowscrollbox > :nth-child(33 of .tabbrowser-tab[fadein]:not([hidden], [closing]))[selected]) { --kw-i: 32; }
+  html#main-window #tabbrowser-tabs[orient="horizontal"]:has(#tabbrowser-arrowscrollbox > :nth-child(34 of .tabbrowser-tab[fadein]:not([hidden], [closing]))[selected]) { --kw-i: 33; }
+  html#main-window #tabbrowser-tabs[orient="horizontal"]:has(#tabbrowser-arrowscrollbox > :nth-child(35 of .tabbrowser-tab[fadein]:not([hidden], [closing]))[selected]) { --kw-i: 34; }
+  html#main-window #tabbrowser-tabs[orient="horizontal"]:has(#tabbrowser-arrowscrollbox > :nth-child(36 of .tabbrowser-tab[fadein]:not([hidden], [closing]))[selected]) { --kw-i: 35; }
+  html#main-window #tabbrowser-tabs[orient="horizontal"]:has(#tabbrowser-arrowscrollbox > :nth-child(37 of .tabbrowser-tab[fadein]:not([hidden], [closing]))[selected]) { --kw-i: 36; }
+  html#main-window #tabbrowser-tabs[orient="horizontal"]:has(#tabbrowser-arrowscrollbox > :nth-child(38 of .tabbrowser-tab[fadein]:not([hidden], [closing]))[selected]) { --kw-i: 37; }
+  html#main-window #tabbrowser-tabs[orient="horizontal"]:has(#tabbrowser-arrowscrollbox > :nth-child(39 of .tabbrowser-tab[fadein]:not([hidden], [closing]))[selected]) { --kw-i: 38; }
+  html#main-window #tabbrowser-tabs[orient="horizontal"]:has(#tabbrowser-arrowscrollbox > :nth-child(40 of .tabbrowser-tab[fadein]:not([hidden], [closing]))[selected]) { --kw-i: 39; }
+  /* dragging tabs: the dragged tab carries its own glass; the slider hides and jumps (no slide) */
+  html#main-window #tabbrowser-tabs[orient="horizontal"]:is([movingtab], [movingtab-group], [movingtab-ungroup]):not(#kw-a):not(#kw-b):not(#sf-a):not(#sf-b):not(#sf-c):not(#sf-d):not(#sf-e):not(#sf-f):not(#sf-g):not(#kw-c)::after { opacity: 0 !important; transition: none !important; }
+  html#main-window #tabbrowser-tabs[orient="horizontal"]:is([movingtab], [movingtab-group], [movingtab-ungroup]) .tabbrowser-tab[selected] .tab-background:not(#kw-a):not(#kw-b):not(#sf-a):not(#sf-b):not(#sf-c):not(#sf-d):not(#sf-e):not(#sf-f):not(#sf-g):not(#kw-c),
+  html#main-window #tabbrowser-tabs[orient="horizontal"] .tabbrowser-tab[selected][dragtarget] .tab-background:not(#kw-a):not(#kw-b):not(#sf-a):not(#sf-b):not(#sf-c):not(#sf-d):not(#sf-e):not(#sf-f):not(#sf-g):not(#kw-c) {
+    background: var(--kw-glass) !important; box-shadow: var(--kw-rim) !important;
+  }
+  /* soft page fade-in on switch */
+  @keyframes kw-page-in { from { opacity: .6; } to { opacity: 1; } }
+  html#main-window #tabbrowser-tabpanels > .deck-selected:not(#kw-a) { animation: kw-page-in .15s ease both; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html#main-window #tabbrowser-tabs[orient="horizontal"]:not(#kw-a):not(#kw-b):not(#sf-a):not(#sf-b):not(#sf-c):not(#sf-d):not(#sf-e):not(#sf-f):not(#sf-g)::after { transition: none !important; }
+    html#main-window :is(#tabbrowser-tabpanels > .deck-selected):not(#kw-a):not(#kw-b):not(#sf-a):not(#sf-b):not(#sf-c):not(#sf-d):not(#sf-e):not(#sf-f) { animation: none !important; }
+  }
+
+  /* URL bar capsule */
+  html#main-window #urlbar:not([open]):not([breakout-extend]) > .urlbar-background:not(#kw-a):not(#sf-a):not(#sf-b):not(#sf-c):not(#sf-d):not(#sf-e) {
+    background: var(--kw-glass) !important; box-shadow: var(--kw-rim) !important; border: none !important;
+  }
+  /* selected tab: the same glossy capsule */
+  html#main-window .tabbrowser-tab[selected] .tab-background:not(#kw-a):not(#sf-a):not(#sf-b):not(#sf-c):not(#sf-d):not(#sf-e) {
+    background: var(--kw-glass) !important; box-shadow: var(--kw-rim) !important;
+  }
+}
+
+/* ===== Address bar icons: Apple-style privacy shield, no globe ===== */
+@media (-moz-platform: macos) {
+  /* Safari "Privacy Report" style shield (outline with the left half filled) */
+  html#main-window #tracking-protection-icon:not(#kw-a):not(#kw-b):not(#sf-a):not(#sf-b):not(#sf-c):not(#sf-d):not(#sf-e):not(#sf-f),
+  html#main-window #trust-icon-container:is(.secure, .scanning):not(.insecure) #trust-icon:not(#kw-a):not(#kw-b):not(#sf-a):not(#sf-b):not(#sf-c):not(#sf-d):not(#sf-e):not(#sf-f) {
+    list-style-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M12%202.6%204.6%205.5v5.8c0%204.6%203%208.6%207.4%2010.1%204.4-1.5%207.4-5.5%207.4-10.1V5.5z%22%20fill%3D%22none%22%20stroke%3D%22context-fill%22%20stroke-width%3D%221.7%22%20stroke-linejoin%3D%22round%22/%3E%3Cpath%20d%3D%22M12%202.6%204.6%205.5v5.8c0%204.6%203%208.6%207.4%2010.1z%22%20fill%3D%22context-fill%22/%3E%3C/svg%3E") !important;
+    -moz-context-properties: fill, fill-opacity !important; fill: currentColor !important;
+  }
+  /* icons are quiet until you hover / focus the address bar (GWfox-T / Safari behaviour) */
+  html#main-window #urlbar :is(#trust-icon-container, #tracking-protection-icon-container, #identity-box, #star-button-box, .urlbar-page-action):not(#kw-a):not(#kw-b):not(#sf-a):not(#sf-b):not(#sf-c):not(#sf-d):not(#sf-e):not(#sf-f) {
+    opacity: 0; transition: opacity .2s ease !important;
+  }
+  html#main-window #urlbar:is(:hover, [focused], [open]) :is(#tracking-protection-icon-container, #identity-box, #star-button-box, .urlbar-page-action):not(#kw-a):not(#kw-b):not(#sf-a):not(#sf-b):not(#sf-c):not(#sf-d):not(#sf-e):not(#sf-f),
+  html#main-window #urlbar :is(#trust-icon-container, #tracking-protection-icon-container, #identity-box, #star-button-box, .urlbar-page-action)[open]:not(#kw-a):not(#kw-b):not(#sf-a):not(#sf-b):not(#sf-c):not(#sf-d):not(#sf-e):not(#sf-f) {
+    opacity: 1;
+  }
+  /* hide the globe: typed text / plain pages / new tab show no identity icon */
+  html#main-window #identity-box:is([pageproxystate="invalid"], .notSecure:not(.notSecureText), .unknownIdentity, .localResource, .chromeUI):not(#kw-a):not(#kw-b):not(#sf-a):not(#sf-b):not(#sf-c):not(#sf-d):not(#sf-e):not(#sf-f) #identity-icon,
+  html#main-window #identity-box[pageproxystate="invalid"]:not(#kw-a):not(#kw-b):not(#sf-a):not(#sf-b):not(#sf-c):not(#sf-d):not(#sf-e):not(#sf-f) {
+    display: none !important;
+  }
+}
