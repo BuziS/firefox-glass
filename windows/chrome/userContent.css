@@ -1,0 +1,1328 @@
+/* Firefox Glass - userContent.css
+ * A Safari-inspired glass theme for Firefox.
+ * Based on GWfox-T by akkva - https://github.com/akkva/GWfox-T
+ * Modifications by BuziS - https://github.com/BuziS/firefox-glass
+ * This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
+ * If a copy of the MPL was not distributed with this file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ */
+
+:root {
+  --bg0: #8867fc;
+  --bg1: light-dark(rgba(70, 70, 70, .08), rgba(170, 170, 170, .08));
+  --bg2: light-dark(rgba(70, 70, 70, .15), rgba(170, 170, 170, .15));
+  --bg3: light-dark(rgba(70, 70, 70, .2), rgba(170, 170, 170, .2));
+  --bg4: light-dark(rgba(255, 255, 255, .55), rgba(25, 25, 25, .55));
+  --bg5: light-dark(rgba(255, 255, 255, .75), rgba(15, 15, 15, .75));
+  --bg6: light-dark(rgba(255, 255, 255, .6), rgba(15, 15, 15, .6));
+  --bg7: color-mix(in srgb, var(--bg0), transparent 75%);
+  --bs1: 0 5px 15px rgba(0, 0, 0, .2), inset 0 0 0 .5px rgba(0, 0, 0, .34), 0 0 0 .5px rgba(0, 0, 0, .12);
+  --bs2: 0 5px 15px rgba(0, 0, 0, .25), inset 0 0 0 .5px rgba(0, 0, 0, .78), 0 0 0 .5px rgba(0, 0, 0, .2);
+  --newtab-background-color-secondary: transparent !important;
+  --border-color-interactive: var(--in-content-box-border-color) !important;
+  --in-content-focus-outline-color: var(--focus-outline-color) !important;
+  --button-background-color-primary: var(--color-accent-primary) !important;
+  --button-background-color-primary-hover: var(--color-accent-primary-hover) !important;
+  --button-background-color-primary-active: var(--color-accent-primary-active) !important;
+  --in-content-primary-button-background: var(--color-accent-primary) !important;
+  --in-content-primary-button-background-hover: var(--color-accent-primary-hover) !important;
+  --in-content-primary-button-background-active: var(--color-accent-primary-active) !important;
+  --in-content-primary-button-text-color: #fff !important;
+  --checkbox-checked-bgcolor: var(--color-accent-primary) !important;
+  --checkbox-checked-hover-bgcolor: var(--color-accent-primary-hover) !important;
+  --checkbox-checked-active-bgcolor: var(--color-accent-primary-active) !important;
+  --brand-color-accent: var(--color-accent-primary) !important;
+  --brand-color-accent-hover: var(--color-accent-primary-hover) !important;
+  --brand-color-accent-active: var(--color-accent-primary-active) !important;
+  --newtab-primary-action-background: var(--color-accent-primary) !important;
+  --color-accent-primary: AccentColor !important;
+  --color-accent-primary-hover: color-mix(in srgb, AccentColor 90%, #fff) !important;
+  --color-accent-primary-active: color-mix(in srgb, AccentColor 90%, #000) !important;
+  --color-accent-primary-selected: AccentColor !important;
+  --button-text-color-primary: #fff !important;
+  --border-color: rgba(105, 105, 105, .2) !important;
+  --in-content-box-border-color: light-dark(rgba(0, 0, 0, .2), rgba(225, 225, 225, .2)) !important;
+  --focus-outline-color: light-dark(color-mix(in srgb, AccentColor 55%, transparent), color-mix(in srgb, AccentColor 45%, #555)) !important;
+
+  --in-content-page-background: light-dark(#fff, #202121) !important;
+  --newtab-background-color: light-dark(#fff, #202121) !important;
+
+:-moz-window-inactive {
+  --bg7: color-mix(in srgb, #777, transparent 75%);
+}
+}
+
+.toggle-button {
+  --toggle-background-color-pressed: var(--color-accent-primary) !important;
+  --toggle-background-color-pressed-hover: var(--color-accent-primary-hover) !important;
+  --toggle-background-color-pressed-active: var(--color-accent-primary-active) !important;
+  --toggle-dot-background-color-on-pressed: #fff !important;
+}
+
+@media (prefers-color-scheme: dark) {
+:root {
+  --text-color-accent-primary-selected: #fff !important;
+  --newtab-primary-element-text-color: #fff !important;
+
+  --in-content-box-background: #282828 !important;
+  --in-content-table-background: #252525 !important;
+  --color-gray-80: #282828 !important;
+  --color-gray-90: #202121 !important;
+
+}
+
+:root[dialogroot] {
+
+  --background-color-canvas: #202121 !important;
+
+}
+
+.home-section .section .sponsored-checkbox:checked:hover {
+  background-color: #436ee3 !important;
+}
+
+@-moz-document url-prefix("about:") {
+
+body { background-color: #202121 !important; } 
+
+* {
+  --toolbar-button-foreground-active: AccentColor !important;
+  --primary-color: AccentColor !important;
+  --selected-background: rgba(18, 128, 253, .2) !important;
+  --popup-background: #313131 !important;
+  --popup-button-background-hover: #383838 !important;
+  --popup-button-background-active: #2b2b2b !important;
+  --toolbar-button-background-hover: #383838 !important;
+  --toolbar-button-background-active: #2b2b2b !important;
+
+  --fxview-background-color: #202121 !important;
+  --in-content-page-background: #202121 !important;
+  --background-color-canvas: #202121 !important;
+  --input-text-background-color: #282828 !important;
+
+}
+
+#migrationWizardDialog {
+
+  background: #202121 !important;
+
+}
+}
+}
+
+@-moz-document url-prefix("about:"), regexp("chrome:\/\/(?!devtools).*") {
+input[type="search"] {
+  background-color: light-dark(rgba(85, 85, 85, .1), rgba(190, 190, 190, .1)) !important;
+  border-color: transparent !important;
+  outline-style: solid !important;
+  outline-color: transparent !important;
+  outline-width: 18px !important;
+  border-radius: 50px !important;
+
+&:is(:focus-visible, [focused]) {
+  outline-color: var(--focus-outline-color) !important;
+  outline-width: 3.5px !important;
+  outline-offset: -1px !important;
+  transition: all .3s cubic-bezier(.8, 0, 0, .8) !important;
+}
+}
+
+#searchInput[focused] {
+  outline-color: var(--focus-outline-color) !important;
+  outline-width: 3.5px !important;
+  outline-offset: -1px !important;
+  transition: all .3s cubic-bezier(.8, 0, 0, .8) !important;
+}
+
+search-addons > search-textbox[focused] {
+  outline-color: var(--focus-outline-color) !important;
+  outline-width: 3.5px !important;
+  outline-offset: -1px !important;
+  transition: all .3s cubic-bezier(.8, 0, 0, .8) !important;
+}
+
+search-textbox {
+  background: light-dark(rgba(85, 85, 85, .1), rgba(190, 190, 190, .1)) !important;
+  border-color: transparent !important;
+  outline-style: solid !important;
+  outline-color: transparent !important;
+  outline-width: 18px !important;
+}
+
+input[type="checkbox"]:not(.reveal-password-checkbox) {
+  appearance: none !important;
+  background-color: light-dark(rgba(70, 70, 70, .12), rgba(170, 170, 170, .15)) !important;
+  border-radius: 4px !important;
+  border: none !important;
+  &:checked {
+  background-color: AccentColor !important;
+  background-image: url("chrome://devtools/skin/images/check.svg") !important;
+  background-size: 14px;
+  background-repeat: no-repeat;
+  background-position: center;
+  -moz-context-properties: fill, stroke;
+  fill: #fff;
+  stroke: #fff;
+  border: none !important;
+  &:hover { background-color: color-mix(in srgb, AccentColor 90%, #fff) !important; }
+  &:hover:active { background-color: color-mix(in srgb, AccentColor 90%, #000) !important; }
+
+}
+}
+
+input[type="radio"]:not(.wallpaper-input, [name="theme"], [name="avatar"]) {
+  appearance: none !important;
+  background-color: light-dark(rgba(70, 70, 70, .12), rgba(170, 170, 170, .15)) !important;
+  border-radius: 50% !important;
+  border: none !important;
+  &:checked {
+  background-color: AccentColor !important;
+  background-image: url("chrome://devtools/skin/images/linear-easing-swatch.svg") !important;
+  background-size: 8px;
+  background-repeat: no-repeat;
+  background-position: center;
+  -moz-context-properties: fill;
+  fill: #fff;
+  border: none !important;
+  &:hover { background-color: color-mix(in srgb, AccentColor 90%, #fff) !important; }
+  &:hover:active { background-color: color-mix(in srgb, AccentColor 90%, #000) !important; }
+
+}
+}
+
+.checkbox-check {
+  appearance: none !important;
+  background-color: light-dark(rgba(70, 70, 70, .12), rgba(170, 170, 170, .15)) !important;
+  border-radius: 4px !important;
+  border: none !important;
+  &[checked] {
+  background-color: AccentColor !important;
+  background-image: url("chrome://devtools/skin/images/check.svg") !important;
+  background-size: 14px;
+  background-repeat: no-repeat;
+  background-position: center;
+  -moz-context-properties: fill, stroke;
+  fill: #fff;
+  stroke: #fff;
+  border: none !important;
+  &:hover { background-color: color-mix(in srgb, AccentColor 90%, #fff) !important; }
+  &:hover:active { background-color: color-mix(in srgb, AccentColor 90%, #000) !important; }
+
+}
+}
+
+.radio-check {
+  appearance: none !important;
+  background-color: light-dark(rgba(70, 70, 70, .12), rgba(170, 170, 170, .15)) !important;
+  border-radius: 50% !important;
+  border: none !important;
+  &[selected] {
+  background-color: AccentColor !important;
+  background-image: url("chrome://devtools/skin/images/linear-easing-swatch.svg") !important;
+  background-size: 8px;
+  background-repeat: no-repeat;
+  background-position: center;
+  -moz-context-properties: fill;
+  fill: #fff;
+  border: none !important;
+  &:hover { background-color: color-mix(in srgb, AccentColor 90%, #fff) !important; }
+  &:hover:active { background-color: color-mix(in srgb, AccentColor 90%, #000) !important; }
+
+}
+}
+
+input:not(.wallpaper-input) {
+  padding-inline-end: 10px !important;
+&::-moz-search-clear-button {
+  padding: 2px !important;
+  border-radius: 50px !important;
+}
+}
+}
+
+@-moz-document url-prefix("about:") {
+:root {
+  --link-color: AccentColor !important;
+  --link-color-hover: color-mix(in srgb, AccentColor 90%, #fff) !important;
+  --link-color-active: color-mix(in srgb, AccentColor 90%, #000) !important;
+  --link-color-visited: AccentColor !important;
+  --border-color-deemphasized: light-dark(rgba(50, 50, 50, .15), rgba(225, 225, 225, .15)) !important;
+
+}
+}
+
+@-moz-document url-prefix("about:buildconfig"), url-prefix("about:cache"), url-prefix("about:support") {
+th {
+ color: #fff !important;
+ border: none !important;
+}
+td {
+  border: .5px solid var(--in-content-box-border-color) !important;
+}
+table {
+  border-radius: 0 !important;
+}
+.action-box, table {
+  border: none !important;
+  background-color: var(--bg1) !important;
+}
+}
+
+@-moz-document url-prefix("about:newtab"), url-prefix("about:home"), url-prefix("about:addons") {
+panel-list {
+  --panel-item-border-radius: 8px;
+  --panel-item-background-color: color-mix(in srgb, light-dark(rgba(0,0,0,.08), rgba(255,255,255,.12)) 100%, transparent);
+  --panel-item-color: #fff;
+  border: none !important;
+  border-radius: 12px !important;
+  box-shadow: var(--bs1) !important;
+  padding: 6px !important;
+  background-color: var(--bg4) !important;
+  backdrop-filter: blur(15px) !important;
+
+@media (prefers-color-scheme: dark) {
+  box-shadow: var(--bs2) !important;
+  outline: 1px solid rgba(235, 235, 235, .2) !important;
+  outline-offset: -1.5px !important;
+}
+}
+}
+
+@-moz-document url-prefix("about:opentabs") {
+:root { background: transparent !important; }
+.sticky-header { background: transparent !important; }
+sidebar-tab-row {
+&:is(:hover, :active) {
+  background-color: color-mix(in srgb, light-dark(rgba(0,0,0,.08), rgba(255,255,255,.12)) 100%, transparent) !important;
+  color: #fff !important;
+
+}
+}
+.fxview-tab-row-main:is(.muted, .soundplaying, .activemedia-blocked):not(.attention) .fxview-tab-row-favicon::after {
+  inset-inline-start: 1px !important;
+  inset-block-start: 1px !important;
+  background-color: transparent !important;
+}
+}
+
+@-moz-document url-prefix("about:firefoxview") {
+* { --fxview-border: transparent !important; }
+
+.card-container {
+  background: light-dark(rgba(85, 85, 85, .1), rgba(190, 190, 190, .1)) !important;
+  box-shadow: none !important;
+}
+}
+
+@-moz-document url-prefix("about:addons") {
+::after { content: none !important; }
+button:not(.toggle-button) {
+ border-radius: 6px !important;
+&:is(:hover, :active) {
+  background-color: color-mix(in srgb, light-dark(rgba(0,0,0,.08), rgba(255,255,255,.12)) 100%, transparent) !important;
+  color: #fff !important;
+
+}
+}
+.card {
+  border: none !important;
+  box-shadow: none !important;
+  background-color: var(--bg1) !important;
+}
+moz-message-bar {
+  border: none !important;
+}
+}
+
+@-moz-document url-prefix("about:config") {
+#about-config-search, #prefs {
+  background-color: var(--bg1) !important;
+  border: none !important;
+}
+#prefs > tr > td, .add > td::before,
+#prefs[has-visible-prefs] > .add > th,
+#prefs[has-visible-prefs] > .add > th::before {
+  border: none !important;
+}
+}
+
+@-moz-document url-prefix("about:preferences") {
+* {
+  --card-border: none !important;
+  --card-box-shadow: none !important;
+  --card-background-color: var(--bg1) !important;
+  --box-border: none !important;
+  --box-group-border: none !important;
+  --promo-background-color: var(--bg1) !important;
+
+  --background-color-canvas: light-dark(#fff, #202121) !important;
+
+}
+#backup-toggle-scheduled-button,
+#setting-control-verifiedManage,
+#setting-control-syncChangeOptions,
+#setting-control-dohAdvancedButton,
+#setting-control-showUpdateHistory,
+#setting-control-addPrimaryPassword,
+#setting-control-etpStatusAdvancedButton,
+#setting-control-fxaConnectAnotherDevice {
+  --box-border-radius-start: var(--box-border-radius-inner) !important;
+}
+#categories {
+  --page-nav-margin-block-start: 30px !important;
+}
+#search-container {
+  padding-top: 30px !important;
+}
+.main-content {
+  margin-top: 0 !important;
+}
+moz-message-bar {
+  border: none !important;
+}
+moz-box-item {
+  padding-inline-start: 0 !important;
+}
+.navigation::after {
+  content: none !important;
+}
+treecol, .tree-columnpicker-button {
+  box-shadow: none !important;
+}
+.container, #input, #blockAiGroup, listheader {
+  border: none !important;
+}
+input:not([type="checkbox"], [type="radio"], [type="button"]) {
+  background-color: var(--bg1) !important;
+&:focus {
+  outline: 3px solid var(--focus-outline-color) !important;
+}
+}
+.privacy-detailedoption {
+  border-color: transparent !important;
+  background-color: var(--bg1) !important;
+}
+.privacy-detailedoption.selected {
+  border-color: var(--border-color-selected) !important;
+  background-color: var(--section-highlight-background-color) !important;
+}
+.qr-code-box:not([hidden="true"]), .info-box-container {
+  background-color: var(--bg1) !important;
+}
+#blockAiGroup {
+  background-color: transparent !important;
+}
+.sync-info-box, #translations-manage-install-list, #handlersView,
+#fxaSyncComputerName, #oneClickSearchProvidersGroup > #engineList {
+  background-color: var(--bg1) !important;
+  border: none !important;
+}
+.button, .picker-item, .select-wrapper {
+  background-color: var(--bg1) !important;
+&:hover {
+  background-color: var(--bg2) !important;
+}
+&:hover:active {
+  background-color: var(--bg3) !important;
+}
+&:not([checked]) {
+  border: none !important;
+}
+}
+}
+
+@-moz-document url("about:privatebrowsing") {
+:root { --in-content-page-background: transparent !important; }
+body {
+  --newtab-search-icon: url("chrome://global/skin/icons/search-glass.svg") !important;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-image: repeating-linear-gradient(-45deg, #68249a 0 250px, #202020 0 500px) !important;
+}
+.container {
+  margin-top: -40px !important;
+}
+.search-handoff-button {
+  background-color: rgba(25, 25, 25, .55) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, .1) !important;
+  backdrop-filter: blur(15px) !important;
+  outline: none !important;
+  border: none !important;
+  fill: rgba(255, 255, 255, .7) !important;
+}
+.search-handoff-button.disabled {
+  opacity: 1 !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, .1) !important;
+  fill: rgba(255, 255, 255, .6) !important;
+}
+.fake-textbox {
+  color: #fff !important;
+}
+.search-handoff-button.disabled .fake-textbox {
+  color: #999 !important;
+}
+.logo {
+  background: url("chrome://browser/skin/privateBrowsing.svg") no-repeat center center !important;
+  background-size: 76px !important;
+  height: 76px !important;
+  width: 76px !important;
+  -moz-context-properties: fill;
+  fill: #b9b9b9;
+}
+.wordmark {
+  fill: #b9b9b9 !important;
+}
+.info, .info-border, .promo-visible, .promo-dismiss {
+  display: none !important;
+}
+}
+
+@-moz-document url-prefix("about:newtab"), url-prefix("about:home") {
+body {
+  --newtab-search-icon: url("chrome://global/skin/icons/search-glass.svg") !important;
+  background-image: var(--newtab-wallpaper, ""), repeating-linear-gradient(-45deg, var(--newtab-wallpaper-color, "") 0 250px, #fff 0 500px) !important;
+@media (prefers-color-scheme: dark) {
+  background-image: var(--newtab-wallpaper, ""), repeating-linear-gradient(-45deg, var(--newtab-wallpaper-color, "") 0 250px, #202121 0 500px) !important;
+}
+}
+
+*[style*="18c7861f-0c9d-48d4-a98c-fb8999e331bd.avif"] {
+  background-image: url("resource://builtin-themes/alpenglow/background-noodles-left.svg") !important;
+@media (prefers-color-scheme: dark) {
+  background-image: url("resource://builtin-themes/alpenglow/background-noodles-left-dark.svg") !important;
+}
+}
+
+@keyframes panel-grow {
+  0% {
+    transform: scale(.92);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.context-menu {
+  border-radius: 12px !important;
+  padding: 6px !important;
+  box-shadow: var(--bs1) !important;
+}
+
+.context-menu > ul {
+  padding: 0 !important;
+}
+
+.context-menu > ul > li > a,
+.context-menu > ul > li > button {
+  border-radius: 8px !important;
+  padding: 6px 12px !important;
+&:is(:focus, :hover) {
+  background: color-mix(in srgb, light-dark(rgba(0,0,0,.08), rgba(255,255,255,.12)) 100%, transparent) !important;
+  color: #fff !important;
+
+}
+}
+
+.context-menu > ul > li.separator {
+  border-bottom: 1px solid light-dark(rgba(50, 50, 50, .1), rgba(225, 225, 225, .1)) !important;
+}
+
+.topsite-form .form-wrapper input[type=text] {
+  border: none !important;
+  background: light-dark(rgba(70, 70, 70, .1), rgba(170, 170, 170, .2)) !important;
+  outline-style: solid !important;
+  outline-color: transparent !important;
+  outline-width: 18px !important;
+}
+
+.topsite-form .form-wrapper input[type=text]:focus {
+  outline-color: var(--focus-outline-color) !important;
+  outline-width: 3.5px !important;
+  outline-offset: -1px !important;
+  transition: all .3s cubic-bezier(.8, 0, 0, .8) !important;
+}
+
+.divider, .edit-topsites-wrapper .actions {
+  border-top: 1px solid light-dark(rgba(50, 50, 50, .1), rgba(225, 225, 225, .1)) !important;
+}
+
+.outer-wrapper.only-search {
+  display: flex !important;
+  padding-block: 0 !important;
+}
+
+.search-inner-wrapper {
+  background-color: light-dark(rgba(255, 255, 255, .8), rgba(15, 15, 15, .7)) !important;
+  border-radius: 50px !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, .1) !important;
+  transition: background .5s !important;
+  z-index: 1;
+}
+
+.search-inner-wrapper:active {
+  background-color: light-dark(rgba(255, 255, 255, .6), rgba(15, 15, 15, .8)) !important;
+  transition: background .5s !important;
+}
+
+.search-handoff-button {
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 12px !important;
+  background-color: transparent !important;
+}
+
+.search-wrapper input {
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  background-color: transparent !important;
+}
+
+.contentSearchSuggestionTable {
+  border-radius: 6px !important;
+}
+
+.contentSearchSuggestionTable .contentSearchHeader,
+.contentSearchSuggestionTable .contentSearchSettingsButton {
+  border-color: transparent !important;
+}
+
+.contentSearchSuggestionTable .contentSearchOneOffsTable {
+  border-top: none !important;
+  background-color: transparent !important;
+}
+
+.contentSearchSuggestionTable .contentSearchSuggestionRow.selected {
+  background: light-dark(rgba(70, 70, 70, .1), rgba(170, 170, 170, .2)) !important;
+}
+
+.contentSearchSuggestionTable .contentSearchSuggestionRow.selected:active {
+  background: light-dark(rgba(70, 70, 70, .15), rgba(170, 170, 170, .3)) !important;
+}
+
+.contentSearchSuggestionTable .contentSearchOneOffItem {
+  border: none !important;
+  border-radius: 6px !important;
+  margin: 5px !important;
+  width: 32px !important;
+}
+
+.search-button {
+  border-radius: 0 12px 12px 0 !important;
+  background-color: transparent !important;
+  transition: background .5s !important;
+}
+
+.search-button:hover {
+  background-color: light-dark(rgba(70, 70, 70, .15), rgba(170, 170, 170, .2)) !important;
+  transition: background .5s !important;
+}
+
+.search-button:focus {
+  border: none !important;
+  box-shadow: none !important;
+  background-color: light-dark(rgba(70, 70, 70, .1), rgba(170, 170, 170, .1)) !important;
+  transition: background .5s !important;
+}
+
+.customize-menu {
+  border-radius: 20px !important;
+}
+
+.tile, .context-menu-button.icon {
+  background-color: rgba(255, 255, 255, .8) !important;
+}
+
+.context-menu-button.icon:active {
+  background-color: rgba(255, 255, 255, .6) !important;
+}
+
+.context-menu-button {
+  fill: #000 !important;
+}
+
+.lightWallpaper .top-site-outer .title {
+  color: #000 !important;
+}
+
+.darkWallpaper .top-site-outer .title {
+  color: #fff !important;
+}
+
+@media not (prefers-color-scheme: dark) {
+.darkWallpaper .context-menu {
+  color-scheme: light !important;
+}
+
+:has(body[style*="18c7861f-0c9d-48d4-a98c-fb8999e331bd.avif"]) {
+.personalize-button:not(:hover, :active),
+.context-menu-button,
+.top-site-outer:not(:hover, :active, .active),
+.logo-and-wordmark .wordmark, .icon.icon-pin-small {
+  color-scheme: light !important;
+}
+
+.top-site-outer .title {
+  color: #000 !important;
+}
+}
+}
+
+.tile:active {
+  background-color: light-dark(rgba(255, 255, 255, .6), rgba(15, 15, 15, .8)) !important;
+  transition: background .5s !important;
+}
+
+.top-site-outer, .top-site-button,
+.top-site-icon:not(.search-topsite) {
+  background-color: transparent !important;
+}
+
+.context-menu-button {
+  inset-inline-end: -9px !important;
+}
+
+.edit-topsites-wrapper .top-site-outer {
+  display: none !important;
+}
+
+.context-menu-button.icon {
+  border-radius: 50px !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, .1) !important;
+}
+
+[data-l10n-id="newtab-custom-recent-toggle"],
+.contentSearchSuggestionTable .contentSearchHeader,
+.wallpaper-attribution, .logo-and-wordmark,
+.icon.icon-pin-small, .card-outer,
+.section-title-container,
+.customize-menu .close-button-wrapper {
+  display: none !important;
+}
+
+.top-site-outer:hover .icon.icon-pin-small {
+  display: inline-block !important;
+}
+
+.wallpaper-input:checked {
+  outline-color: transparent !important;
+}
+
+.wallpaper-list .wallpaper-input:checked {
+  outline-color: AccentColor !important;
+
+}
+
+.wallpaper-input:checked, .wallpaper-input.selected {
+  box-shadow: none !important;
+}
+
+.confirmation-dialog::backdrop,
+.modalOverlayOuter::backdrop,
+.modal-overlay, .modalOverlayOuter {
+  background: none !important;
+}
+
+.modalOverlayOuter, .confirmation-dialog {
+  border-radius: 20px !important;
+  border: none !important;
+  animation-name: panel-grow;
+  animation-duration: 250ms;
+  background-color: var(--bg4) !important;
+}
+
+.modal-overlay {
+  border-radius: 20px !important;
+}
+
+.modalOverlayOuter, .tile, .context-menu-button.icon, .search-inner-wrapper {
+  backdrop-filter: blur(15px) !important;
+}
+
+.modalOverlayOuter, .contentSearchSuggestionTable, .confirmation-dialog {
+  box-shadow: var(--bs1) !important;
+}
+
+.customize-menu {
+  background-color: var(--bg4) !important;
+  backdrop-filter: blur(15px) !important;
+  box-shadow: var(--bs1) !important;
+  margin: 16px 16px 0 0 !important;
+  height: calc(100% - 16px) !important;
+  padding-inline: 12px !important;
+  min-height: unset !important;
+:has(.category.wallpaper-list) {
+.category-header, .category-list, ~ * {
+  display: none !important;
+}
+}
+}
+
+.category-header {
+  display: flex !important;
+  flex-direction: row-reverse !important;
+  justify-content: flex-end !important;
+  align-items: center !important;
+> .wallpapers-reset {
+  font-size: 0 !important;
+  width: 32px !important;
+  height: 16px !important;
+  background: light-dark(rgba(0, 0, 0, .08), rgba(255, 255, 255, .08)) !important;
+  border-radius: 12px !important;
+  position: relative !important;
+  outline: 1px solid light-dark(rgba(0, 0, 0, .18), rgba(255, 255, 255, .18)) !important;
+  outline-offset: -1px !important;
+  cursor: auto !important;
+  order: -1;
+&::before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 12px;
+  height: 12px;
+  background: light-dark(rgba(0, 0, 0, .18), rgba(255, 255, 255, .18));
+  border-radius: 50%;
+}
+:root:has(body[style*="background"]) & {
+  background: var(--color-accent-primary) !important;
+  outline: none !important;
+&:hover { background: var(--color-accent-primary-hover) !important; }
+&:active { background: var(--color-accent-primary-active) !important; }
+&::before {
+  transform: translateX(16px);
+  background: white;
+}
+}
+}
+> [data-l10n-id="newtab-wallpaper-title"] {
+  order: -1;
+  margin-inline-start: 7.5px;
+}
+}
+
+.context-menu, .contentSearchSuggestionTable, .location-input-wrapper, .weatherInfoLink, .weatherNotAvailable, .personalize-button {
+  backdrop-filter: blur(15px) !important;
+  background-color: var(--bg4) !important;
+}
+
+.wallpaper-list.category {
+  margin: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  inset-inline-start: 0 !important;
+  padding: 20px !important;
+  transition: none !important;
+  animation: .25s ease-in panel-grow;
+}
+
+.weatherNotAvailable, .weatherCard, .weatherInfoLink, .personalize-button {
+  border-radius: 50px !important;
+}
+
+.weatherCard {
+  box-shadow: none !important;
+  padding: 15px !important;
+}
+
+.weatherSponsorText {
+  display: none;
+}
+
+.weatherButtonContextMenuWrapper {
+  background: none !important;
+  box-shadow: none !important;
+  margin-left: 10px;
+  margin-top: 10px;
+&:not(:has(.context-menu)) {
+  visibility: collapse;
+.weatherCard:hover & {
+  visibility: visible;
+}
+}
+> .weatherButtonContextMenu {
+  min-height: 24px !important;
+  min-width: 24px !important;
+  max-height: 24px !important;
+  max-width: 24px !important;
+  border-radius: 50px !important;
+}
+&::after {
+  content: none !important;
+}
+}
+
+*+button {
+  border-radius: var(--panel-item-border-radius) !important;
+&:hover {
+  background-color: var(--panel-item-background-color) !important;
+  color: var(--panel-item-color) !important;
+}
+}
+
+.location-input-wrapper input {
+  border: none !important;
+  background-color: light-dark(rgba(70, 70, 70, .1), rgba(170, 170, 170, .2)) !important;
+}
+
+@media (prefers-color-scheme: dark) {
+.modalOverlayOuter, .contentSearchSuggestionTable, .customize-menu, .context-menu {
+  box-shadow: var(--bs2) !important;
+  outline: 1px solid rgba(235, 235, 235, .2) !important;
+  outline-offset: -1.5px !important;
+}
+}
+
+.search-inner-wrapper, .tile, .context-menu-button.icon, .location-input-wrapper, .weatherInfoLink, .weatherNotAvailable, .weatherButtonContextMenu, .personalize-button {
+  background-color: var(--bg1) !important;
+  box-shadow: none !important;
+&:hover { background-color: var(--bg2) !important; }
+&:active { background-color: var(--bg3) !important; }
+
+}
+
+@media (prefers-color-scheme: dark) {
+.lightWallpaper .context-menu {
+  color-scheme: dark !important;
+}
+
+.lightWallpaper .tile {
+  background-color: rgba(15, 15, 15, .7) !important;
+}
+
+.lightWallpaper .tile:hover {
+  background-color: rgba(15, 15, 15, .75) !important;
+}
+
+.lightWallpaper .tile:active {
+  background-color: rgba(15, 15, 15, .6) !important;
+}
+
+.lightWallpaper .context-menu-button.icon {
+  background-color: rgba(15, 15, 15, .7) !important;
+}
+
+.lightWallpaper .context-menu-button.icon:hover {
+  background-color: rgba(15, 15, 15, .75) !important;
+}
+
+.lightWallpaper .context-menu-button.icon:active {
+  background-color: rgba(15, 15, 15, .6) !important;
+}
+
+.context-menu-button {
+  fill: #fff !important;
+}
+}
+
+@media (prefers-color-scheme: light) {
+.darkWallpaper .tile {
+  background-color: rgba(255, 255, 255, .7) !important;
+}
+
+.darkWallpaper .tile:hover {
+  background-color: rgba(255, 255, 255, .75) !important;
+}
+
+.darkWallpaper .tile:active {
+  background-color: rgba(255, 255, 255, .6) !important;
+}
+
+.darkWallpaper .context-menu-button.icon {
+  background-color: rgba(255, 255, 255, .7) !important;
+}
+
+.darkWallpaper .context-menu-button.icon:hover {
+  background-color: rgba(255, 255, 255, .75) !important;
+}
+
+.darkWallpaper .context-menu-button.icon:active {
+  background-color: rgba(255, 255, 255, .6) !important;
+}
+}
+}
+
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   GWfox-T WINDOWS â€” SAFARI NEW TAB BOOKMARKS (Issue 7)
+   Restyled top-sites on about:newtab to look like Safari's Favourites.
+   Only modifies the New Tab top-sites section â€” nothing else is changed.
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+
+@-moz-document url-prefix("about:newtab"), url-prefix("about:home") {
+
+  /* Top-sites grid â€” centred flex row like Safari's Favourites */
+  .top-sites-list {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 16px 20px !important;
+    padding: 0 !important;
+    margin: 0 auto !important;
+    max-width: 900px !important;
+    list-style: none !important;
+  }
+
+  /* Each bookmark cell */
+  .top-site-outer {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    width: 84px !important;
+    gap: 6px !important;
+    cursor: pointer !important;
+    -moz-user-select: none !important;
+  }
+
+  /* Square-rounded tile â€” Safari Favourites icon look */
+  .tile {
+    width: 80px !important;
+    height: 80px !important;
+    border-radius: 18px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background-color: var(--bg4) !important;
+    backdrop-filter: blur(15px) !important;
+    box-shadow:
+      0 2px 12px rgba(0, 0, 0, 0.10),
+      inset 0 0.5px 0 rgba(255, 255, 255, 0.35) !important;
+    border: none !important;
+    transition:
+      transform 0.18s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.18s ease,
+      background-color 0.15s ease !important;
+    overflow: hidden !important;
+  }
+
+  /* Hover lift â€” like macOS Dock icons */
+  .top-site-outer:hover .tile {
+    transform: scale(1.07) !important;
+    box-shadow:
+      0 8px 28px rgba(0, 0, 0, 0.18),
+      inset 0 0.5px 0 rgba(255, 255, 255, 0.45) !important;
+    background-color: var(--bg5) !important;
+  }
+
+  /* Active press-down */
+  .top-site-outer:active .tile {
+    transform: scale(0.95) !important;
+  }
+
+  /* Favicon inside tile */
+  .top-site-icon:not(.search-topsite) {
+    width: 52px !important;
+    height: 52px !important;
+    border-radius: 12px !important;
+    background-size: contain !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+  }
+
+  .icon-wrapper {
+    width: 52px !important;
+    height: 52px !important;
+  }
+
+  /* Site label */
+  .title {
+    font-size: 11px !important;
+    font-weight: 500 !important;
+    line-height: 1.2 !important;
+    text-align: center !important;
+    max-width: 84px !important;
+    overflow: hidden !important;
+    white-space: nowrap !important;
+    text-overflow: ellipsis !important;
+    color: light-dark(rgba(0, 0, 0, 0.75), rgba(255, 255, 255, 0.75)) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .top-site-outer .top-site-inner > a {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 6px !important;
+    padding: 0 !important;
+    text-decoration: none !important;
+  }
+
+  /* Wallpaper-specific colours */
+  .lightWallpaper .title { color: rgba(0,0,0,0.80) !important; }
+  .darkWallpaper .title  { color: rgba(255,255,255,0.85) !important; }
+
+  /* Context menu button */
+  .context-menu-button.icon {
+    top: -5px !important;
+    right: -5px !important;
+    width: 22px !important;
+    height: 22px !important;
+  }
+
+  /* Dark mode tile */
+  @media (prefers-color-scheme: dark) {
+    .tile {
+      background-color: rgba(44, 44, 46, 0.82) !important;
+      box-shadow:
+        0 2px 12px rgba(0, 0, 0, 0.35),
+        inset 0 0.5px 0 rgba(255, 255, 255, 0.08) !important;
+    }
+    .top-site-outer:hover .tile {
+      background-color: rgba(58, 58, 60, 0.9) !important;
+    }
+  }
+
+} /* end @-moz-document */
+
+/* ===== new-tab page uses the same colour as the toolbar ===== */
+@-moz-document url-prefix("about:newtab"), url-prefix("about:home") {
+  :root:not(.lightWallpaper, .darkWallpaper) {
+    --newtab-background-color: light-dark(#f6f6f7, #202121) !important;
+  }
+  :root:not(.lightWallpaper, .darkWallpaper) body {
+    background-color: light-dark(#f6f6f7, #202121) !important;
+  }
+}
+
+/* ===== new tab — no search, small icons, everything centred ===== */
+@-moz-document url-prefix("about:newtab"), url-prefix("about:home") {
+.search-wrapper:not(#nt-a):not(#nt-b):not(#nt-c), .search-handoff-button:not(#nt-a):not(#nt-b):not(#nt-c) { display: none !important; }
+.top-sites:not(#nt-a):not(#nt-b):not(#nt-c), .top-sites-list-wrapper:not(#nt-a):not(#nt-b):not(#nt-c) { width: auto !important; max-width: none !important; }
+.top-sites-list-wrapper:not(#nt-a):not(#nt-b):not(#nt-c) {
+  position: fixed !important; inset: 0 !important; margin: 0 !important;
+  width: auto !important; height: auto !important;
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  pointer-events: none !important; z-index: 1 !important;
+}
+.top-sites-list:not(#nt-a):not(#nt-b):not(#nt-c) {
+  pointer-events: auto !important;
+  display: flex !important; flex-wrap: wrap !important; justify-content: center !important;
+  gap: 18px 14px !important; max-width: min(600px, 94vw) !important; width: min(600px, 94vw) !important;
+  margin: 0 auto !important; padding: 0 !important;
+}
+.top-site-outer:not(#nt-a):not(#nt-b):not(#nt-c) { width: 84px !important; padding: 0 !important; margin: 0 !important; }
+.top-site-inner:not(#nt-a):not(#nt-b):not(#nt-c) { width: 84px !important; height: auto !important; }
+.top-site-outer .tile:not(#nt-a):not(#nt-b):not(#nt-c) {
+  width: 64px !important; height: 64px !important; margin: 0 auto !important;
+  border-radius: 16px !important; position: relative !important;
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,.25), inset 0 0 0 .5px light-dark(rgba(0,0,0,.08), rgba(255,255,255,.08)) !important;
+}
+.top-site-outer .tile .icon-stack:not(#nt-a):not(#nt-b):not(#nt-c) {
+  position: absolute !important; inset: 0 !important; width: 100% !important; height: 100% !important; margin: 0 !important;
+}
+.top-site-outer .tile .icon-wrapper:not(#nt-a):not(#nt-b):not(#nt-c) {
+  position: absolute !important; inset: 0 !important; margin: auto !important;
+  width: 40px !important; height: 40px !important;
+}
+.top-site-outer .tile .top-site-icon:not(#nt-a):not(#nt-b):not(#nt-c) {
+  position: absolute !important; inset: 0 !important; margin: auto !important;
+  width: 40px !important; height: 40px !important;
+  background-size: contain !important; background-position: center !important; background-repeat: no-repeat !important;
+  border-radius: 10px !important; transform: none !important;
+}
+.top-site-outer .title:not(#nt-a):not(#nt-b):not(#nt-c) {
+  width: 84px !important; font-size: 11.5px !important; line-height: 14px !important;
+  margin-top: 6px !important; text-align: center !important; height: auto !important;
+  white-space: nowrap !important; overflow: hidden !important; text-overflow: ellipsis !important;
+}
+.top-site-outer .title span:not(#nt-a):not(#nt-b):not(#nt-c) { white-space: nowrap !important; }
+/* only your pinned favourites, no history suggestions */
+.top-site-outer:not(.pinned-cell):not(#nt-a):not(#nt-b):not(#nt-c) { display: none !important; }
+/* no pin badge on tiles */
+.top-site-outer .icon-pin-small:not(#nt-a):not(#nt-b):not(#nt-c) { display: none !important; }
+/* tile ⋯ button: small glass circle in the tile corner, only on hover */
+.top-site-outer .context-menu-button:not(#nt-a):not(#nt-b):not(#nt-c) {
+  top: -4px !important; left: auto !important; inset-inline-start: auto !important; right: 6px !important; inset-inline-end: 6px !important;
+  width: 20px !important; height: 20px !important; min-width: 20px !important; padding: 0 !important;
+  border-radius: 999px !important; background-size: 12px !important; background-position: center !important;
+  background-color: light-dark(rgba(255,255,255,.75), rgba(60,60,64,.75)) !important;
+  backdrop-filter: blur(8px) !important;
+  box-shadow: 0 1px 4px rgba(0,0,0,.3), 0 0 0 .5px light-dark(rgba(0,0,0,.12), rgba(255,255,255,.15)) !important;
+  opacity: 0 !important; transition: opacity .15s ease !important;
+}
+.top-site-outer:is(:hover, :focus-within) .context-menu-button:not(#nt-a):not(#nt-b):not(#nt-c), .top-site-outer .context-menu-button:not(#nt-a):not(#nt-b):not(#nt-c):is(:hover, [aria-expanded="true"]) { opacity: 1 !important; }
+/* Customize button like Safari's "Edit": grey glass pill instead of blue */
+.open-customization-button:not(#nt-a):not(#nt-b):not(#nt-c) {
+  --button-background-color-primary: light-dark(rgba(0,0,0,.08), rgba(255,255,255,.12));
+  --button-background-color-primary-hover: light-dark(rgba(0,0,0,.14), rgba(255,255,255,.18));
+  --button-background-color-primary-active: light-dark(rgba(0,0,0,.18), rgba(255,255,255,.22));
+  --button-text-color-primary: light-dark(#1d1d1f, #f5f5f7);
+  --button-text-color-primary-hover: light-dark(#1d1d1f, #f5f5f7);
+  --button-text-color-primary-active: light-dark(#1d1d1f, #f5f5f7);
+  --color-accent-primary: light-dark(rgba(0,0,0,.08), rgba(255,255,255,.12));
+  --color-accent-primary-hover: light-dark(rgba(0,0,0,.14), rgba(255,255,255,.18));
+  --color-accent-primary-active: light-dark(rgba(0,0,0,.18), rgba(255,255,255,.22));
+  --button-text-color: light-dark(#1d1d1f, #f5f5f7);
+  backdrop-filter: blur(10px) !important; border-radius: 999px !important;
+}
+}
+
+/* solid home colours are solid (no theme stripes); picture wallpapers unchanged */
+@-moz-document url-prefix("about:newtab"), url-prefix("about:home") {
+  :root:is(.lightWallpaper, .darkWallpaper) body:not(#nt-a):not(#nt-b) {
+    background-image: var(--newtab-wallpaper, none) !important;
+    background-color: var(--newtab-wallpaper-color, transparent) !important;
+  }
+}
+
+/* keep shortcuts centred below the floating toolbar; glossy glass tiles */
+@-moz-document url-prefix("about:newtab"), url-prefix("about:home") {
+  .top-sites-list-wrapper:not(#nt-a):not(#nt-b):not(#nt-c):not(#nt-d) { padding-top: 120px !important; box-sizing: border-box !important; }
+  .top-site-outer .tile:not(#nt-a):not(#nt-b):not(#nt-c):not(#nt-d) {
+    background: light-dark(rgba(255,255,255,.45), rgba(255,255,255,.08)) !important;
+    backdrop-filter: blur(14px) saturate(1.5) !important;
+    box-shadow: 0 2px 8px light-dark(rgba(0,0,0,.08), rgba(0,0,0,.25)),
+      0 0 0 .5px light-dark(rgba(0,0,0,.10), rgba(255,255,255,.14)),
+      inset 1px 1.5px 1px -1px rgba(255,255,255,.30),
+      inset -.4px -.4px 1px 0 rgba(255,255,255,.18) !important;
+  }
+  .top-site-outer:hover .tile:not(#nt-a):not(#nt-b):not(#nt-c):not(#nt-d) { background: light-dark(rgba(255,255,255,.65), rgba(255,255,255,.14)) !important; }
+}
+
+/* Customize panel opens below the floating toolbar */
+@-moz-document url-prefix("about:newtab"), url-prefix("about:home") {
+  .customize-menu:not(#nt-a):not(#nt-b):not(#nt-c) {
+    top: 134px !important; inset-block-start: 134px !important;
+    max-height: calc(100% - 150px) !important; bottom: 16px !important; inset-block-end: 16px !important; height: auto !important;
+  }
+}
+
+@-moz-document url-prefix("about:newtab"), url-prefix("about:home") {
+  .customize-menu:not(#nt-a):not(#nt-b):not(#nt-c)[open] { display: flex !important; flex-direction: column !important; padding-block: 14px 0 !important; background: light-dark(rgba(246,246,248,.9), rgba(30,30,32,.9)) !important; backdrop-filter: blur(30px) saturate(1.4) !important; }
+  .customize-menu .customize-menu-content:not(#nt-a):not(#nt-b):not(#nt-c) { flex: 1 1 auto !important; min-height: 0 !important; height: auto !important; overflow-y: auto !important; padding-bottom: 8px !important; }
+  .customize-menu .manage-settings-footer:not(#nt-a):not(#nt-b):not(#nt-c) {
+    position: static !important; flex: 0 0 auto !important; background: transparent !important; backdrop-filter: none !important; padding-block: 12px !important; margin: 0 !important; height: auto !important; min-height: 0 !important;
+    border-top: .5px solid light-dark(rgba(0,0,0,.08), rgba(255,255,255,.08)) !important;
+  }
+}
+
+/* wallpaper sub-pages cover the main menu (no see-through overlap) */
+@-moz-document url-prefix("about:newtab"), url-prefix("about:home") {
+  .customize-menu section.category.wallpaper-list:not(#nt-a):not(#nt-b):not(#nt-c) {
+    background: light-dark(rgb(246,246,248), rgb(30,30,32)) !important;
+    border-radius: inherit !important;
+    inset: 0 !important; padding: 14px 12px 12px !important;
+    overflow-y: auto !important; box-sizing: border-box !important;
+  }
+}
+
+/* ---- Windows fixes ---- */
+/* Safari-like font on Windows: Inter (free OFL licence, closest match to Apple's SF font) */
+@font-face { font-family: "SF Inter"; src: url("fonts/InterVariable.woff2") format("woff2"); font-weight: 100 900; font-display: block; }
+@-moz-document url-prefix("about:newtab"), url-prefix("about:home"), url-prefix("about:privatebrowsing") {
+  body, .top-site-outer .title, .top-site-outer .title span { font-family: "SF Inter", "Segoe UI Variable Text", "Segoe UI", sans-serif !important; }
+}
+/* tile names: centre the 84px label under the 64px tile, whatever box Firefox puts it in */
+.top-site-outer .title:not(#nt-a):not(#nt-b):not(#nt-c) {
+  margin-inline: calc((100% - 84px) / 2) !important; padding-inline: 0 !important; box-sizing: border-box !important;
+}
+
+/* Firefox 161: the inner name box is narrower than the label, so names sat off-centre */
+.top-site-outer .title .title-label:not(#nt-a):not(#nt-b):not(#nt-c) { display: block !important; width: 100% !important; max-width: none !important; margin: 0 !important; padding: 0 !important; text-align: center !important; }
+.top-site-outer .title .sponsored-label:not(#nt-a):not(#nt-b):not(#nt-c) { display: none !important; }
+
+/* ===== no blue in Firefox pages ===== */
+:root {
+  --color-accent-primary: light-dark(#1d1d1f, #f2f2f4) !important;
+  --color-accent-primary-hover: light-dark(#3a3a3c, #ffffff) !important;
+  --color-accent-primary-active: light-dark(#000000, #dcdcde) !important;
+  --focus-outline-color: light-dark(rgba(0,0,0,.28), rgba(255,255,255,.32)) !important;
+}
+@-moz-document url-prefix("about:") {
+  :root { --link-color: light-dark(#1d1d1f, #e5e5ea) !important; --link-color-hover: light-dark(#000, #fff) !important; --button-background-color-primary: light-dark(#1d1d1f, #f2f2f4) !important; --button-text-color-primary: light-dark(#fff, #1d1d1f) !important; }
+}
+
+/* ===== home page with widgets — shortcuts on top, widgets below, nothing under the toolbar ===== */
+@-moz-document url-prefix("about:newtab"), url-prefix("about:home") {
+  body:has(.widgets-section-container) .container.nova-enabled:not(#nt-a):not(#nt-b):not(#nt-c) { padding-top: 70px !important; }
+  body:has(.widgets-section-container) .top-sites-list-wrapper:not(#nt-a):not(#nt-b):not(#nt-c):not(#nt-d):not(#nt-e) {
+    position: static !important; inset: auto !important; padding-top: 8px !important; pointer-events: auto !important; z-index: auto !important;
+    display: flex !important; justify-content: center !important; width: 100% !important;
+  }
+  body:has(.widgets-section-container) main.content-main > .content:not(#nt-a):not(#nt-b):not(#nt-c) { grid-row: 3 !important; }
+  body:has(.widgets-section-container) main.content-main > .content-full-width:not(#nt-a):not(#nt-b):not(#nt-c) { grid-row: 4 !important; margin-top: 12px !important; }
+
+  /* widget cards: same glass as the shortcut tiles */
+  :is(.widgets-container article, .weather-widget):not(#nt-a):not(#nt-b):not(#nt-c) {
+    background: light-dark(rgba(255,255,255,.50), rgba(255,255,255,.06)) !important;
+    backdrop-filter: blur(18px) saturate(1.5) !important; border-radius: 20px !important; border: none !important;
+    box-shadow: 0 4px 18px light-dark(rgba(0,0,0,.08), rgba(0,0,0,.30)), 0 0 0 .5px light-dark(rgba(0,0,0,.10), rgba(255,255,255,.12)),
+      inset 1px 1.5px 1px -1px rgba(255,255,255,.28), inset -.4px -.4px 1px 0 rgba(255,255,255,.14) !important;
+  }
+  /* no purple: list "Add an item" and other widget buttons in grey/white */
+  .widgets-container :is(.lists-add-button, button[class*="add-button"]):not(#nt-a):not(#nt-b):not(#nt-c) {
+    background: light-dark(#1d1d1f, #f2f2f4) !important; color: light-dark(#fff, #1d1d1f) !important; border: none !important; border-radius: 999px !important;
+  }
+  .widgets-container :is(.lists-add-button, button[class*="add-button"]):not(#nt-a):not(#nt-b):not(#nt-c):hover { background: light-dark(#3a3a3c, #fff) !important; }
+}
+/* Customize panel: "Manage widgets" / "See more themes" sub-pages cover the main page instead of drawing over it */
+@-moz-document url-prefix("about:newtab"), url-prefix("about:home") {
+  .customize-menu :is(.widgets-mgmt-panel, .themes-mgmt-panel, [class$="-mgmt-panel"]):not(#nt-a):not(#nt-b):not(#nt-c) {
+    position: absolute !important; inset: 0 !important; width: auto !important; height: auto !important; max-height: none !important;
+    background: light-dark(rgb(246,246,248), rgb(30,30,32)) !important; border-radius: inherit !important;
+    overflow-y: auto !important; box-sizing: border-box !important; z-index: 5 !important; padding-block: 14px 12px !important; visibility: visible !important;
+  }
+  .customize-menu .customize-menu-content.subpanel-open > .home-section:not(#nt-a):not(#nt-b) { visibility: hidden !important; }
+  .customize-menu.nova-enabled:not(#nt-a):not(#nt-b):not(#nt-c):not(#nt-d) { position: fixed !important; overflow: hidden !important; }
+}
+
+/* ===== weather never under the toolbar (also when it's the only widget); smaller widgets ===== */
+@-moz-document url-prefix("about:newtab"), url-prefix("about:home") {
+  .container.nova-enabled:not(#nt-a):not(#nt-b):not(#nt-c):not(#nt-d) { padding-top: 118px !important; }
+  body:has(.widgets-section-container) .top-sites-list-wrapper:not(#nt-a):not(#nt-b):not(#nt-c):not(#nt-d):not(#nt-e):not(#nt-f) { padding-top: 0 !important; }
+  .widgets-section-container:not(#nt-a):not(#nt-b) { zoom: .78 !important; justify-self: center !important; margin-inline: auto !important; width: 1060px !important; max-width: none !important; }
+  .widgets-section-container .widgets-container:not(#nt-a):not(#nt-b):not(#nt-c) { width: 1040px !important; max-width: none !important; min-width: 1040px !important; }
+  aside.sidebar-inline-end:not(#nt-a):not(#nt-b) { zoom: .88 !important; }
+}
+
+/* ===== Settings, private page, Reader view, PDF viewer ===== */
+@-moz-document url-prefix("about:preferences"), url-prefix("about:settings") {
+  moz-input-search, #searchInput { --focus-outline-width: 1px !important; --input-text-border-radius: 999px !important; --border-radius-medium: 999px !important; }
+  #searchInput:not(#nt-a) { border-radius: 999px !important; outline-width: 1px !important; }
+  #categories .category:not(#nt-a) { border-radius: 10px !important; }
+  .main-content:not(#nt-a) { padding-inline: 32px !important; }
+  #mainPrefPane:not(#nt-a), .pane-container:not(#nt-a) { max-width: 720px !important; margin-inline: auto !important; }
+}
+@-moz-document url("about:privatebrowsing") {
+  body:not(#nt-a) {
+    background-image: radial-gradient(1200px 600px at 50% -10%, rgba(255,255,255,.06), transparent 60%) !important;
+    background-color: #161617 !important;
+  }
+  .logo:not(#nt-a) { fill: #8e8e93 !important; opacity: .9 !important; }
+  .search-handoff-button:not(#nt-a) {
+    background-color: rgba(255,255,255,.07) !important; border-radius: 999px !important; backdrop-filter: blur(20px) !important;
+    box-shadow: 0 6px 22px rgba(0,0,0,.35), inset 0 0 0 .5px rgba(255,255,255,.12), inset 1px 1.5px 1px -1px rgba(255,255,255,.22) !important;
+  }
+}
+@-moz-document url-prefix("about:reader") {
+  body:not(#nt-a) { --font-size: 19px; }
+  .moz-reader-content:not(#nt-a) { font-family: -apple-system, "SF Pro Text", "Segoe UI", system-ui, sans-serif !important; line-height: 1.6 !important; }
+  body.serif .moz-reader-content:not(#nt-a) { font-family: "New York", "Iowan Old Style", Georgia, serif !important; }
+  .reader-header .header:not(#nt-a), .reader-title:not(#nt-a) { font-family: -apple-system, "SF Pro Display", "Segoe UI", system-ui, sans-serif !important; letter-spacing: -.01em !important; }
+  :is(.toolbar, .reader-controls):not(#nt-a) {
+    border-radius: 16px !important; border: none !important; padding: 4px !important;
+    background: light-dark(rgba(255,255,255,.7), rgba(255,255,255,.06)) !important; backdrop-filter: blur(20px) !important;
+    box-shadow: 0 4px 18px light-dark(rgba(0,0,0,.08), rgba(0,0,0,.30)), inset 0 0 0 .5px light-dark(rgba(0,0,0,.10), rgba(255,255,255,.12)), inset 1px 1.5px 1px -1px rgba(255,255,255,.25) !important;
+  }
+  :is(.toolbar, .reader-controls) :is(button, .toolbar-button):not(#nt-a) { border-radius: 10px !important; }
+  .domain:not(#nt-a), .reader-estimated-time:not(#nt-a) { color: light-dark(#6e6e73, #98989d) !important; text-decoration: none !important; }
+  .moz-reader-content a:not(#nt-a) { color: inherit !important; text-decoration-color: light-dark(rgba(0,0,0,.3), rgba(255,255,255,.35)) !important; }
+}
+/* Built-in PDF viewer (pdf.js) */
+:root:has(#outerContainer #viewerContainer):not(#nt-a) {
+  --toolbar-bg-color: light-dark(rgba(246,246,248,.85), rgba(32,32,34,.85)) !important;
+  --toolbar-border-color: transparent !important; --toolbar-box-shadow: none !important;
+  --body-bg-color: light-dark(#ececee, #161617) !important;
+  --field-bg-color: light-dark(rgba(0,0,0,.05), rgba(255,255,255,.08)) !important; --field-border-color: transparent !important;
+  --button-hover-color: light-dark(rgba(0,0,0,.07), rgba(255,255,255,.10)) !important; --toggled-btn-bg-color: light-dark(rgba(0,0,0,.10), rgba(255,255,255,.14)) !important;
+  --dropdown-btn-bg-color: light-dark(rgba(0,0,0,.05), rgba(255,255,255,.08)) !important; --dropdown-btn-border: none !important;
+  --sidebar-toolbar-bg-color: light-dark(rgba(246,246,248,.9), rgba(28,28,30,.9)) !important;
+}
+:root:has(#outerContainer) :is(#toolbarContainer, #toolbarViewer):not(#nt-a) { backdrop-filter: blur(20px) saturate(1.4) !important; border-bottom: .5px solid light-dark(rgba(0,0,0,.08), rgba(255,255,255,.08)) !important; }
+:root:has(#outerContainer) .toolbarButton:not(#nt-a) { border-radius: 8px !important; }
+:root:has(#outerContainer) :is(.toolbarField, #pageNumber, .dropdownToolbarButton, #scaleSelectContainer):not(#nt-a) { border-radius: 999px !important; border: none !important; }
+:root:has(#outerContainer) .dropdownToolbarButton > select:not(#nt-a) { border-radius: 999px !important; }
+:root:has(#outerContainer) #viewerContainer .page:not(#nt-a) { border-radius: 6px !important; box-shadow: 0 6px 24px rgba(0,0,0,.35) !important; border: none !important; }
